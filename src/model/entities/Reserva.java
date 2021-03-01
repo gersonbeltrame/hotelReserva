@@ -42,7 +42,7 @@ public class Reserva {
 	public String atualizarDatas(Date entrada, Date saida) {
 		
 		Date now = new Date();
-		if (saida.before(now) || entrada.before(now)) {
+		if (entrada.before(now) || saida.before(now)) {
 			return "ERRO NA RESERVA!!! As datas de reserva para atualização devem ser datas futuras";
 		} 
 		if (!saida.after(entrada)){
