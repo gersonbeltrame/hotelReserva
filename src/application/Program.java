@@ -40,7 +40,7 @@ public class Program {
 				System.out.println("ERRO NA RESERVA!!! A data de saida deve ser depois que a da entrada");
 			} else {
 				reserva.atualizarDatas(entrada, saida);
-				System.out.println("Reservado: " + reserva);
+				System.out.println("Reservado: " + reserva);  
 			}
 			
 			
