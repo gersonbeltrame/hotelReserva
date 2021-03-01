@@ -42,11 +42,7 @@ public class Program {
 				reserva.atualizarDatas(entrada, saida);
 				System.out.println("Reservado: " + reserva);  
 			}
-			
-			
 		}
-		
-		
+		sc.close();
 	}
-
 }
