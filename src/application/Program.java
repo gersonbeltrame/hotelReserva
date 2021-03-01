@@ -20,9 +20,11 @@ public class Program {
 		Date entrada = sdf.parse(sc.next());
 		System.out.print("Digite a data de saida (dd/MM/yyyy): ");
 		Date saida = sdf.parse(sc.next());
+		
 		if (!saida.after(entrada)) {
 			System.out.println("ERRO NA RESERVA!!! A data de saida deve ser depois que a da entrada");
-		} else {
+		} 
+		else {
 			Reserva reserva = new Reserva(numeroQuarto, entrada, saida); 
 			System.out.println("Reservado: " + reserva);
 			
@@ -33,16 +35,13 @@ public class Program {
 			System.out.print("Digite a data de saida (dd/MM/yyyy): ");
 			saida = sdf.parse(sc.next());
 			
-			Date now = new Date();
-			if (entrada.before(now) || saida.before(now)) {
-				System.out.println("ERRO NA RESERVA!!! As datas de reserva para atualização devem ser datas futuras");
-			} else if (!saida.after(entrada)){
-				System.out.println("ERRO NA RESERVA!!! A data de saida deve ser depois que a da entrada");
-			} else {
-				reserva.atualizarDatas(entrada, saida);
+			String error = reserva.atualizarDatas(entrada, saida);
+			if(error != null) {
+				System.out.println("Erro na reserva: " + error);
+			} 
+			else {
 				System.out.println("Reservado: " + reserva);  
 			}
 		}
 		sc.close();
-	}
-}
+	}}
