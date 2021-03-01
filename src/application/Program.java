@@ -6,25 +6,24 @@ import java.util.Date;
 import java.util.Scanner;
 
 import model.entities.Reserva;
+import model.exceptions.Excessao;
 
 public class Program {
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
-		System.out.print("Numero do quarto: ");
-		int numeroQuarto = sc.nextInt();
-		System.out.print("Digite a data de entrada (dd/MM/yyyy): ");
-		Date entrada = sdf.parse(sc.next());
-		System.out.print("Digite a data de saida (dd/MM/yyyy): ");
-		Date saida = sdf.parse(sc.next());
+		try {
+			System.out.print("Numero do quarto: ");
+			int numeroQuarto = sc.nextInt();
+			System.out.print("Digite a data de entrada (dd/MM/yyyy): ");
+			Date entrada = sdf.parse(sc.next());
+			System.out.print("Digite a data de saida (dd/MM/yyyy): ");
+			Date saida = sdf.parse(sc.next());
+			
 		
-		if (!saida.after(entrada)) {
-			System.out.println("ERRO NA RESERVA!!! A data de saida deve ser depois que a da entrada");
-		} 
-		else {
 			Reserva reserva = new Reserva(numeroQuarto, entrada, saida); 
 			System.out.println("Reservado: " + reserva);
 			
@@ -35,13 +34,18 @@ public class Program {
 			System.out.print("Digite a data de saida (dd/MM/yyyy): ");
 			saida = sdf.parse(sc.next());
 			
-			String error = reserva.atualizarDatas(entrada, saida);
-			if(error != null) {
-				System.out.println("Erro na reserva: " + error);
-			} 
-			else {
-				System.out.println("Reservado: " + reserva);  
-			}
+			reserva.atualizarDatas(entrada, saida);
+			System.out.println("RESERVADO!!! " + reserva);  
+		} 
+		catch (ParseException e) {
+			System.out.println("Formato de data invalido");
+		}
+		catch (Excessao e) {
+			System.out.println("Erro na reserva: " + e.getMessage());
+		}
+		catch (RuntimeException e) {
+			System.out.println("Erro inesperado!!!");
 		}
 		sc.close();
-	}}
+	}
+}
